@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# BookVault - Book Explorer App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Live Demo - https://your-netlify-link.netlify.app
 
-In the project directory, you can run:
+GitHub - https://github.com/rohansingh64/your-repo-name
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## What is this app
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+It is a book explorer app where you can browse and search for books.
 
-### `npm test`
+The data comes from the Open Library API. It is completely free and needs no API key.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+When the app opens you see popular fiction books on the homepage.
 
-### `npm run build`
+You can search any book by typing in the search bar at the top.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Clicking on a book card opens a detail page with full information about that book.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `npm run eject`
+Search works with a debounce of 500ms so it does not spam the API on every keypress.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Each book card shows the cover image, title, author, rating, year, and subjects.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The detail page shows the description, opening line, subjects, edition count, and a link to Open Library.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+While data is loading you see skeleton cards with a shimmer effect instead of a blank screen.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+If the API fails you see an error message with a retry button.
 
-## Learn More
+If search returns nothing you see an empty state message.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The app works on mobile, tablet, and desktop screens.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Technologies used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+React 18 for building the UI.
 
-### Analyzing the Bundle Size
+Tailwind CSS version 3 for styling and responsive design.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+React Router DOM for navigation between home page and detail page.
 
-### Making a Progressive Web App
+Open Library API for all the book data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## How the folders are organized
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+src/components has all the UI components like Navbar, BookCard, BookGrid, Hero, Footer, SkeletonGrid, ErrorState and EmptyState.
 
-### Deployment
+src/hooks has one custom hook called useBooks which handles all the data fetching and state.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+src/utils has the api file where all the API calls are written.
 
-### `npm run build` fails to minify
+src/pages has two files. HomePage and BookDetailPage.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## State management
+
+I used a custom hook called useBooks instead of Redux because the app is small and a hook is enough.
+
+The hook manages the books list, loading state, error state, search query, and pagination all in one place.
+
+Components just receive data from this hook and focus only on showing things on screen.
+
+---
+
+## API details
+
+Homepage calls the search endpoint with a popular fiction query sorted by rating.
+
+Search bar calls the same endpoint with whatever the user typed.
+
+Book detail page calls the works endpoint using the book key to get description and opening line.
+
+Cover images come from the Open Library covers endpoint using the cover ID.
+
+---
+
+## How to run locally
+
+Clone the repo and go into the folder.
+
+Run npm install.
+
+Run npm start.
+
+It opens at localhost 3000 in your browser.
+
+---
+
+## Deployment
+
+I deployed it on Netlify by connecting my GitHub repo.
+
+Build command is npm run build and publish directory is build.
+
+I also added a file called _redirects inside the public folder with this line inside it.
+
+/* /index.html 200
+
+This is needed so that React Router works properly on Netlify when you refresh on the detail page.
+
+---
+
+## Some limitations
+
+Some books do not have a description on Open Library so the detail page shows a message for that.
+
+Some books do not have a cover image so a placeholder is shown instead.
+
+Many books do not have ratings because not enough people rated them on Open Library.
