@@ -1,9 +1,9 @@
 # BookVault - Book Explorer App
 
 
-Live Demo - https://your-netlify-link.netlify.app
+Live Demo - https://bookexplorerplatform.netlify.app/
 
-GitHub - https://github.com/rohansingh64/your-repo-name
+GitHub - https://github.com/rohansingh64/BookVault
 
 ---
 
