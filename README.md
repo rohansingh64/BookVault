@@ -41,7 +41,7 @@ The app works on mobile, tablet, and desktop screens.
 
 ## Technologies used
 
-React 18 for building the UI.
+React 19 for building the UI.
 
 Tailwind CSS version 3 for styling and responsive design.
 
